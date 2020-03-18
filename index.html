@@ -1,20 +1,149 @@
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="favicon.ico" />
+<title>共稽会登录系统</title>
+<script src="js/jquery-2.2.3.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<link type="text/css" href="css/jquery-ui.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/bootstrap.min.js"></script>
+<link type="text/css" href="css/login.css" rel="stylesheet">
+<script src="js/my.js"></script>
+<SCRIPT language = "JavaScript">
+    function checkUserName(){    //验证用户名
+        var fname = document.myform.username.value;
+        var reg=/^[0-9a-zA-Z]/;
+        if(fname.length != 0){
+            for(i=0;i<fname.length;i++){
+                if(!reg.test(fname)){
+                    alert("只能输入字母或数字");
+                    return false;}
+            }
+            if(fname.length<4||fname.length>16){
+                alert("只能输入4-16个字符")
+                return false;
+            }
+        }
+        else{    alert("请输入用户名");
+            document.myform.username.focus();
+            return false     }
+        return true;
+    }
+
+    function passCheck(){ //验证密码
+        var userpass = document.myform.password.value;
+        if(userpass == ""){
+            alert("未输入密码 \n" + "请输入密码");
+            document.myform.password.focus();
+            return false;   }
+        if(userpass.length < 6||userpass.length>12){
+            alert("密码必须在 6-12 个字符。\n");
+            return false;   }
+        return true;   }
+
+    function passCheck2(){
+        var p1=document.myform.password.value;
+        var p2=document.myform.password2.value;
+        if(p1!=p2){
+            alert("确认密码与密码输入不一致");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    function checkEmail(){
+        var Email = document.getElementById("email").value;
+        var e = Email.indexOf("@"&&".");
+        if(Email.length!=0){
+            if(e>0){
+                if(Email.charAt(0)=="@"&&"."){
+                    alert("符号@和符号.不能再邮件地址第一位");
+                return false;
+                }
+                else{
+                    return true;
+                }
+            }
+            else{
+                alert("电子邮件格式不正确\n"+"必须包含@符号和.符号！");
+                return false;
+            }
+        }
+        else{
+            alert("请输入电子邮件！")
+            return false;
+        }
+    }
+
+    function checkbirthday(){    //验证用户名
+        var year = document.myform.birthday.value;
+        if(year < 1900 || year > 2020){
+            alert("年份范围从1900-2020年");
+            return false;}
+        return true;     }
+
+
+    function validateform(){
+        if(checkUserName()&&passCheck( )&&passCheck2()&&checkEmail()&&checkbirthday())
+                return true;
+        else
+            return false;
+    }
+
+    function clearText( ) {
+        document.myform.user.value="" ;
+        document.myform.password.value="" ;
+    }
+
+	//显示隐藏对应的switchPwd()方法:
+	$(function(){
+        // 通过jqurey修改
+        $("#passwordeye").click(function(){
+            let type =  $("#password").attr('type')
+            if(type === "password"){
+                $("#password").attr("type","text");
+            }else{
+                $("#password").attr("type","password");
+            }
+        });
+	});
+</SCRIPT>
+    <style type = "text/css;">
+        #head2 {text-align: center;}
+    </style>
+
 </head>
 <body>
-  <h2>共稽会</h2>
-     <p>群号619195307，够胆你就来，csgo全员白银</p>
-<h3>群员列表</h3>
-<h4>群主fury</h4>
-     <p>优秀的星舰指挥官，优秀的p社君主，优秀的文明统治者，辣鸡的csgo职业选手，优秀的坎巴拉火箭工程师，善于论谋参政，不善反应之敏捷，fury老矣，尚能饭否</p>
-<h4>群员219</h4>
-     <p>喜爱做内鬼，动不动摊牌的秀儿星舰指挥官，优秀的p社君主，优秀的文明统治者，优秀的燧发枪打击者，特别优秀的鸭王电竞选手一只鸭堪比5只，一只更比一只强</p>
-<h4>群员仓鼠</h4>
-     <p>养生游戏奴隶主，优秀的星舰指挥官，优秀的p社君主，优秀的文明统治者，优秀的排排站燧发枪打击者，怒删csgo three thousand times，过于太秀的帝国时代领导者，以及登峰造极的善于偷玩电脑</p>
-<h4>群员破影子</h4>
-     <p>优秀的文明统治者，过于太秀的帝国领导者，以及无与伦比的善于在玩电脑时写作业</p>
-<h4>群员茶壶（哪位？）</h4>
-<h4>群员埃尔登之环（你又是哪位？）</h4>
-</ body>
+<img src="img/login_bg.jpg" class="bg">
+<div id="head2">
+	<img src="共稽会网站标题改.png" width=100% height=100% />
+</div>
+<div id="center">
+<form name="myform" onSubmit="return validateform( )" enctype="multipart/form-data" action="cgi-bin/login.cgi" method="post" >
+	<div class="input-group">
+        <h3>用户名：</h3>&nbsp;<input class="form-control" id="username" name="username" type="text"  style="height:40px" value="" placeholder="只能输入字母或数字，4-16个字符"/>
+	</div>
+	<div class="input-group">        
+		<h3>密&nbsp;&nbsp;&nbsp;码：</h3>&nbsp;<input class="form-control" id="password" name="password" type="password" style="height:40px"  value="" placeholder="密码长度6-12位"/>
+		<span class="input-group-btn">
+			<INPUT class="btn btn-default" id="passwordeye" type="button" value="show/hide"">
+        </span>
+	</div>
 
+	<div id="btn">
+		<INPUT class="btn btn-primary" name="loginButton" type="submit" id="Button" value="登陆"  onclick="checkUserName()">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="register.html"><INPUT class="btn btn-primary" name="registerButton" id="Button" type="button" value="注册"></a>
+	</div>
+</form>
+</div>
+<div id="bottom">
+	<div class="footer" style="color:white;">
+     	Copyright &copy; 2019-2020 All Rights Reserved. 备案号：根本没有
+    </div>
+</div>
+</body>
 </html>
