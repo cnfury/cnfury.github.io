@@ -1,0 +1,6 @@
+servlet
+  serlvet-name  servlet 
+  servlet-clasa com.gongjihui.servlet
+  init-param
+    param- name 
+         value
