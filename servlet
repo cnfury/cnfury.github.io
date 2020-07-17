@@ -1,0 +1,31 @@
+public class a implents Servlet{
+    @Override
+    public void init（ServletConfig b）{
+     string c = b.getServletName（）；
+     string e = b.getInitParameter（“fury”）；
+     ServletContext d = b.getServletContext（）；
+     string h = d.getContextPath（）;
+     string i = d.getRealPath（）;
+     d.setAttribute（“hamster”,“嘴强王者”）;
+     string g = d.getAttribute（“hamster”）;
+     string f = d.getInitParameter（“219”）;
+}
+     @Override
+     public void Service（ServletRequest j,ServletResponse k）{
+     HttpServletRequest L = （HttpServletRequest）k;
+     L.getMethod（）;
+     L.getRequestURI（）;
+     L.getRequestURL（“/”）;
+     L.getRemoteHost（）;
+     L.setAttribute（“cangshu”,”帝国主义者”）;
+     L.getAttribute（“cangshu”）;
+     L.getHeader（）;
+     L.getParameter（“username”）;
+ string[] N = L.gerParameterValues（“username”）;
+  syso（Arrays.asList（N））;
+     L.setCharasterEncoding（“UTF-8”）;
+     RequestDispatcher M = L.getRequestDispatcher（“/index.html”）;
+     M.forward（j,k）;
+
+}
+}
