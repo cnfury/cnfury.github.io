@@ -1,0 +1,9 @@
+pulic class a extends HttpServlet{
+   @Override
+   public void doGet（HttpServletRequest b,HttpServletResponse c）{
+     c.setHeader（”Content-type”,“Charact=UTF-8”）
+     c.setStatus（302）
+     c.setHeader（“Location”,”www.baidu.com”）
+     c.setRedirect（“www.baidu.com”）
+}
+}
